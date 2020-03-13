@@ -3,20 +3,20 @@ const todo = require('./index.js');
 const assert = require('assert');
 
 // todo and list test
-todo.todo('ノートを買う');
-todo.todo('鉛筆を買う');
-assert.deepEqual(todo.list(), ['ノートを買う', '鉛筆を買う']);
+todo.todo('task1');
+todo.todo('task2');
+assert.deepEqual(todo.list(), ['task1', 'task2']);
 
 
 // done and donelist test
-todo.done('鉛筆を買う');
-assert.deepEqual(todo.list(), ['ノートを買う']);
-assert.deepEqual(todo.doneList(), ['鉛筆を買う']);
+todo.done('task2');
+assert.deepEqual(todo.list(), ['task1']);
+assert.deepEqual(todo.doneList(), ['task2']);
 
 //del test
-todo.del('鉛筆を買う');
-todo.del('ノートを買う');
+todo.del('task1');
+todo.del('task1');
 assert.deepEqual(todo.list(), [])
 assert.deepEqual(todo.doneList(), [])
 
-console.log('テストが正常に完了しました');
+console.log('success!');
