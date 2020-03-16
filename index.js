@@ -1,6 +1,21 @@
 'use script';
-// ket:task name value:task boolean(done or yet)
-const tasks = new Map();
+// key:task name value:task boolean(done or yet)
+let tasks = new Map();
+
+const fs = require('fs');
+const fileName = './tasks.json';
+
+try {
+    const data = fs.readFileSync(fileName, 'utf-8');
+    tasks = new Map(JSON.parse(data));
+} catch (err) {
+    console.log(`Couldn't restore from ${fileName}`)
+}
+
+// save tasks
+function saveTasks() {
+    fs.writeFileSync(fileName, JSON.stringify(Array.from(tasks)), 'utf-8');
+}
 
 /**
  * todo: add task
@@ -8,6 +23,7 @@ const tasks = new Map();
  */
 function todo(task) {
     tasks.set(task, false);
+    saveTasks();
 }
 
 /**
@@ -48,6 +64,7 @@ function done(task) {
     if (tasks.has(task)) {
         tasks.set(task, true)
     }
+    saveTasks();
 }
 
 /**
@@ -56,6 +73,7 @@ function done(task) {
  */
 function del(task) {
     tasks.delete(task)
+    saveTasks();
 }
 
 module.exports = {

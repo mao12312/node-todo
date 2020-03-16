@@ -15,7 +15,7 @@ assert.deepEqual(todo.doneList(), ['task2']);
 
 //del test
 todo.del('task1');
-todo.del('task1');
+todo.del('task2');
 assert.deepEqual(todo.list(), [])
 assert.deepEqual(todo.doneList(), [])
 
